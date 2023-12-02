@@ -9,27 +9,23 @@ import util.GetInputFileContents;
 
 public class TrebuchetTest {
 
-    private static final List<String> FILE_CONTENTS;
+    @Test
+    public void trebuchetPartOneTest() throws FileNotFoundException {
+        List<String> fileContents = GetInputFileContents
+            .getFileLines("src/test/resources/dayOne/dayOnePartOneInputTest.txt");
 
-    static {
-        try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/dayOne/dayOneInput.txt");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        int result = TrebuchetPartOne.getCalibrationValue(fileContents);
+
+        assertEquals(142, result);
     }
 
     @Test
-    public void trebuchetPartOneTest() {
-        int result = TrebuchetPartOne.getCalibrationValue(FILE_CONTENTS);
+    public void trebuchetPartTwoTest() throws FileNotFoundException {
+        List<String> fileContents = GetInputFileContents
+            .getFileLines("src/test/resources/dayOne/dayOnePartTwoInputTest.txt");
 
-        assertEquals(54953, result);
-    }
+        int result = TrebuchetPartTwo.getCalibrationValue(fileContents);
 
-    @Test
-    public void trebuchetPartTwoTest() {
-        int result = TrebuchetPartTwo.getCalibrationValue(FILE_CONTENTS);
-
-        assertEquals(53885, result);
+        assertEquals(281, result);
     }
 }
