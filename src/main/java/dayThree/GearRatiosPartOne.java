@@ -39,7 +39,7 @@ public class GearRatiosPartOne {
 
                 if (Character.isDigit(charAt)) {
                     surrounding.addAll(point.surroundingPoints());
-                    digits = digits + charAt;
+                    digits += charAt;
                 }
                 else if (!digits.isEmpty()) {
                     for (Point s: surrounding) {
