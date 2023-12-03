@@ -15,10 +15,12 @@ public class GearRatiosPartTwo {
         Map<Point, List<Integer>> starNumbers = new HashMap<>();
         char[][] lines = new char[fileContents.size()][];
 
+        // Fill in lines array with the input values
         for (int row = 0; row < lines.length; row++) {
             lines[row] = fileContents.get(row).toCharArray();
         }
 
+        // Add gear symbol locations to a set
         for (int row = 0; row < lines.length; row++) {
             for (int col = 0; col < lines[row].length; col++) {
                 if (lines[row][col] == '*') {

@@ -12,10 +12,12 @@ public class GearRatiosPartOne {
         char[][] lines = new char[fileContents.size()][];
         Set<Point> symbol = new HashSet<>();
 
+        // Fill in lines array with the input values
         for (int row = 0; row < fileContents.size(); row++) {
             lines[row] = fileContents.get(row).toCharArray();
         }
 
+        // Add special symbol locations to a set
         for (int row = 0; row < lines.length; row++) {
             for (int col = 0; col < lines[row].length; col++) {
                 char charAt = lines[row][col];
@@ -29,6 +31,7 @@ public class GearRatiosPartOne {
         Set<Point> surrounding = new HashSet<>();
         String digits = "";
 
+        // Collect numbers from the surrounding points
         for (int row = 0; row < lines.length; row++) {
             for (int col = 0; col < lines[row].length; col++) {
                 Point point = new Point(col, row);
