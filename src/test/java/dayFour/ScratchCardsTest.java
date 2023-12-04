@@ -25,4 +25,11 @@ public class ScratchCardsTest {
 
         assertEquals(13, result);
     }
+
+    @Test
+    public void scratchCardPointsPartTwoTest() {
+        long result = ScratchCardsPartTwo.scratchCardPoints(FILE_CONTENTS);
+
+        assertEquals(30, result);
+    }
 }
