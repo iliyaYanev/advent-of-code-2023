@@ -1,4 +1,4 @@
-package dayThree;
+package day_3;
 
 import java.util.ArrayList;
 import java.util.HashMap;

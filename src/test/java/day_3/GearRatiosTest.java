@@ -1,4 +1,4 @@
-package dayThree;
+package day_3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
