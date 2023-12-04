@@ -13,7 +13,7 @@ public class ScratchCardsTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/dayFour/dayFourTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_4/dayFourTestInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

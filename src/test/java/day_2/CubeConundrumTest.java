@@ -13,7 +13,7 @@ public class CubeConundrumTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/dayTwo/dayTwoTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_2/dayTwoTestInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

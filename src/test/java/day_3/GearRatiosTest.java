@@ -13,7 +13,7 @@ public class GearRatiosTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/dayThree/dayThreeTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_3/dayThreeTestInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

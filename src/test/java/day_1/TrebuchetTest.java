@@ -12,7 +12,7 @@ public class TrebuchetTest {
     @Test
     public void trebuchetPartOneTest() throws FileNotFoundException {
         List<String> fileContents = GetInputFileContents
-            .getFileLines("src/test/resources/dayOne/dayOnePartOneInputTest.txt");
+            .getFileLines("src/test/resources/day_1/dayOnePartOneInputTest.txt");
 
         int result = TrebuchetPartOne.getCalibrationValue(fileContents);
 
@@ -22,7 +22,7 @@ public class TrebuchetTest {
     @Test
     public void trebuchetPartTwoTest() throws FileNotFoundException {
         List<String> fileContents = GetInputFileContents
-            .getFileLines("src/test/resources/dayOne/dayOnePartTwoInputTest.txt");
+            .getFileLines("src/test/resources/day_1/dayOnePartTwoInputTest.txt");
 
         int result = TrebuchetPartTwo.getCalibrationValue(fileContents);
 
