@@ -4,3 +4,4 @@
 * #### [Cube Conundrum](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_2)
 * #### [Gear Ratios](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_3)
 * #### [Scratchcards](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_4)
+* #### [Fertilizer](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_5)
