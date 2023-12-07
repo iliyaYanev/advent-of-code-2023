@@ -1,62 +1,41 @@
 package day_1;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Stream;
 
 public class TrebuchetPartTwo {
 
-    private static final Map<String, String> NUMBERS = Map.of(
-        "one", "1",
-        "two", "2",
-        "three", "3",
-        "four", "4",
-        "five", "5",
-        "six", "6",
-        "seven", "7",
-        "eight", "8",
-        "nine", "9"
+    private static final List<String> NUMBERS = List.of(
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine"
     );
 
-    public static Integer getCalibrationValue(List<String> fileContents) {
-        int sum = 0;
+    public static Long getCalibrationValue(List<String> fileContents) {
+        long sum = 0;
 
-        for (String line : fileContents) {
-            int index = 999;
+        for (String line: fileContents) {
+            List<Integer> numbers = new LinkedList<>();
 
-            while(index == 999) {
-                String first = "";
+            for (int i = 0; i < line.length(); i++) {
+                int index = i;
+                Stream.of(line.charAt(i))
+                    .filter(Character::isDigit)
+                    .forEach(c -> numbers.add(Character.getNumericValue(c)));
 
-                for (Map.Entry<String, String> entry : NUMBERS.entrySet()) {
-                    int pos = line.indexOf(entry.getKey());
-
-                    if (pos != -1 && pos < index) {
-                        index = line.indexOf(entry.getKey());
-                        first = entry.getKey();
-                    }
-                }
-
-                index = -1;
-
-                if (NUMBERS.containsKey(first)) {
-                    line = line.replaceFirst(first, NUMBERS.get(first));
-                    index = 999;
-                }
+                NUMBERS.stream()
+                    .filter(e -> line.startsWith(e, index))
+                    .forEach(e -> numbers.add(NUMBERS.indexOf(e) + 1));
             }
 
-            int first = -1;
-            int last = -1;
-
-            for (String c : line.split("")) {
-                if (Character.isDigit(c.charAt(0))) {
-                    if (first == -1) {
-                        first = Integer.parseInt(c);
-                    }
-
-                    last = Integer.parseInt(c);
-                }
-            }
-
-            sum += first * 10 + last;
+            sum += numbers.get(0) * 10 + numbers.get(numbers.size() - 1);
         }
 
         return sum;

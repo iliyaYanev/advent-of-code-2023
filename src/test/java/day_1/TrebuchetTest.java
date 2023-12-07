@@ -14,7 +14,7 @@ public class TrebuchetTest {
         List<String> fileContents = GetInputFileContents
             .getFileLines("src/test/resources/day_1/dayOnePartOneInputTest.txt");
 
-        int result = TrebuchetPartOne.getCalibrationValue(fileContents);
+        long result = TrebuchetPartOne.getCalibrationValue(fileContents);
 
         assertEquals(142, result);
     }
@@ -24,7 +24,7 @@ public class TrebuchetTest {
         List<String> fileContents = GetInputFileContents
             .getFileLines("src/test/resources/day_1/dayOnePartTwoInputTest.txt");
 
-        int result = TrebuchetPartTwo.getCalibrationValue(fileContents);
+        long result = TrebuchetPartTwo.getCalibrationValue(fileContents);
 
         assertEquals(281, result);
     }
