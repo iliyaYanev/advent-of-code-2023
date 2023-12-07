@@ -14,22 +14,15 @@ public class Hand implements Comparable<Hand> {
 
     private HandType handType;
 
+
     public Hand(List<Card> cards, long bid, boolean withJokers) {
         this.cards = cards;
         this.bid = bid;
         calculateHandType(withJokers);
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
     public long getBid() {
         return bid;
-    }
-
-    public HandType getHandType() {
-        return handType;
     }
 
     @Override
@@ -56,7 +49,7 @@ public class Hand implements Comparable<Hand> {
         Map<Card, Integer> cardMap = new HashMap<>();
 
         for (final Card card : cards) {
-            if (withJokers && card.getCard() == 'J') {
+            if (withJokers && card.getCard() == '*') {
                 jokers++;
                 continue;
             }
@@ -85,9 +78,11 @@ public class Hand implements Comparable<Hand> {
             .sorted(Comparator.reverseOrder())
             .toList());
 
-        int topValue = sortedValues.get(0);
-        topValue += jokers;
-        sortedValues.set(0, topValue);
+        if (withJokers) {
+            int topValue = sortedValues.get(0);
+            topValue += jokers;
+            sortedValues.set(0, topValue);
+        }
 
         boolean possibleFullHouse = false;
         boolean possibleThreeOfAKind = false;

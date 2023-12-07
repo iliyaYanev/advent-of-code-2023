@@ -20,7 +20,10 @@ public class CamelCardsPartTwo {
             long bid = Long.parseLong(input[1]);
 
             for (int i = 0; i < cardsString.length(); i++) {
-                cards.add(Card.ofChar(cardsString.charAt(i)));
+                char currentCard = cardsString.charAt(i) == 'J' ?
+                    '*' : cardsString.charAt(i);
+
+                cards.add(Card.ofChar(currentCard));
             }
 
             hands.add(new Hand(cards, bid, true));
