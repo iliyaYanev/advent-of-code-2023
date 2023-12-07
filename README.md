@@ -6,3 +6,4 @@
 * #### [Scratchcards](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_4)
 * #### [If You Give A Seed A Fertilizer](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_5)
 * #### [Wait For It](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_6)
+* #### [Camel Cards](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_7)
