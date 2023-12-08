@@ -13,7 +13,7 @@ public class Wasteland {
     public static long wastelandStepsPartOne(String input) {
         long steps = 0;
 
-        List<String> parts = Arrays.stream(input.trim().split("\r\n\r\n"))
+        List<String> parts = Arrays.stream(input.trim().split(System.lineSeparator() + System.lineSeparator()))
             .toList();
 
         String moves = parts.get(0).trim();
@@ -33,7 +33,7 @@ public class Wasteland {
         long steps = 0;
         boolean allOnZ;
 
-        List<String> parts = Arrays.stream(input.trim().split("\r\n\r\n"))
+        List<String> parts = Arrays.stream(input.trim().split(System.lineSeparator() + System.lineSeparator()))
             .toList();
 
         String moves = parts.get(0).trim();
