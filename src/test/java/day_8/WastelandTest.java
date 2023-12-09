@@ -18,7 +18,6 @@ public class WastelandTest {
         }
     }
 
-
     @Test
     public void wastelandPartOneTest() {
         long result = WastelandPartOne.wastelandSteps(FILE_CONTENTS);

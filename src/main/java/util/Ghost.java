@@ -5,8 +5,7 @@ public class Ghost {
     private Node position;
     private Long lastMatchIndex = null;
 
-    public Ghost() {
-    }
+    public Ghost() { }
 
     public Node getPosition() {
         return position;

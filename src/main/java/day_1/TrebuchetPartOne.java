@@ -5,7 +5,7 @@ import java.util.List;
 public class TrebuchetPartOne {
 
     public static Integer getCalibrationValue(List<String> fileContents) {
-        int sum = 0;
+        int calibrationValue = 0;
 
         for (String line : fileContents) {
             int first = -1;
@@ -21,9 +21,9 @@ public class TrebuchetPartOne {
                 }
             }
 
-            sum += first * 10 + last;
+            calibrationValue += first * 10 + last;
         }
 
-        return sum;
+        return calibrationValue;
     }
 }

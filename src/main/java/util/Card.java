@@ -35,6 +35,7 @@ public enum Card {
             }
 
         }
+
         throw new IllegalArgumentException("Card not found");
     }
 }

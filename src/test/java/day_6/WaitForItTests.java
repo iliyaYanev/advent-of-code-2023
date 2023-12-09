@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import util.GetInputFileContents;
 
 public class WaitForItTests {
+
     private static final List<String> FILE_CONTENTS;
 
     static {

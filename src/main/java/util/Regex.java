@@ -6,11 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex {
-    public static String match(String regex, String input) {
-        Matcher m = Pattern.compile(regex).matcher(input);
-
-        return m.find() ? m.group() : null;
-    }
 
     public static List<String> matchAll(String regex, String input) {
         Matcher m = Pattern.compile(regex).matcher(input);
@@ -21,9 +16,5 @@ public class Regex {
         }
 
         return list;
-    }
-
-    public static boolean matches(String regex, String input) {
-        return Pattern.compile(regex).matcher(input).matches();
     }
 }

@@ -19,7 +19,7 @@ public class TrebuchetPartTwo {
     );
 
     public static Long getCalibrationValue(List<String> fileContents) {
-        long sum = 0;
+        long calibrationValue = 0;
 
         for (String line: fileContents) {
             List<Integer> numbers = new LinkedList<>();
@@ -35,9 +35,9 @@ public class TrebuchetPartTwo {
                     .forEach(e -> numbers.add(NUMBERS.indexOf(e) + 1));
             }
 
-            sum += numbers.get(0) * 10 + numbers.get(numbers.size() - 1);
+            calibrationValue += numbers.get(0) * 10 + numbers.get(numbers.size() - 1);
         }
 
-        return sum;
+        return calibrationValue;
     }
 }

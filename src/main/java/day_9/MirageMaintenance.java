@@ -9,8 +9,8 @@ import util.Regex;
 
 public class MirageMaintenance {
 
-    public static long extrapolatedSumPartOne(String fileContents) {
-        return Arrays.stream(fileContents.trim().split(System.lineSeparator()))
+    public static long extrapolatedSumPartOne(String input) {
+        return Arrays.stream(input.trim().split(System.lineSeparator()))
             .map(MirageMaintenance::parseLong)
             .map(MirageMaintenance::expand)
             .map(Lists::reverse)
@@ -19,8 +19,8 @@ public class MirageMaintenance {
             .sum();
     }
 
-    public static long extrapolatedSumPartTwo(String fileContents) {
-        return Arrays.stream(fileContents.trim().split(System.lineSeparator()))
+    public static long extrapolatedSumPartTwo(String input) {
+        return Arrays.stream(input.trim().split(System.lineSeparator()))
             .map(MirageMaintenance::parseLong)
             .map(MirageMaintenance::expand)
             .map(Lists::reverse)
