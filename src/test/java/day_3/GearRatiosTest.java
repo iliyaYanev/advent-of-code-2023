@@ -13,7 +13,7 @@ public class GearRatiosTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_3/dayThreeTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_3/dayThreeInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -23,13 +23,13 @@ public class GearRatiosTest {
     public void gearRatiosPartOneTest() {
         int result = GearRatiosPartOne.partNumbers(FILE_CONTENTS);
 
-        assertEquals(4361, result);
+        assertEquals(556367, result);
     }
 
     @Test
     public void gearRatiosPartTwoTest() {
         int result  = GearRatiosPartTwo.gearRatios(FILE_CONTENTS);
 
-        assertEquals(467835, result);
+        assertEquals(89471771, result);
     }
 }

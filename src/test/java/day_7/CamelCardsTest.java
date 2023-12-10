@@ -13,7 +13,7 @@ public class CamelCardsTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_7/daySevenTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_7/daySevenInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -23,13 +23,13 @@ public class CamelCardsTest {
     public void camelCardsPartOneTest() {
         long result = CamelCardsPartOne.winnings(FILE_CONTENTS);
 
-        assertEquals(6440, result);
+        assertEquals(254024898, result);
     }
 
     @Test
     public void camelCardsPartTwoTest() {
         long result = CamelCardsPartTwo.winnings(FILE_CONTENTS);
 
-        assertEquals(5905, result);
+        assertEquals(254115617, result);
     }
 }

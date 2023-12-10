@@ -13,7 +13,7 @@ public class CubeConundrumTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_2/dayTwoTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_2/dayTwoInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -23,13 +23,13 @@ public class CubeConundrumTest {
     public void cubeConundrumPartOneTest() {
         int result = CubeConundrumPartOne.possibleGames(FILE_CONTENTS);
 
-        assertEquals(8, result);
+        assertEquals(2447, result);
     }
 
     @Test
     public void cubeConundrumPartTwoTest() {
         int result = CubeConundrumPartTwo.powerSum(FILE_CONTENTS);
 
-        assertEquals(2286, result);
+        assertEquals(56322, result);
     }
 }

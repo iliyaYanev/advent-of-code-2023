@@ -12,7 +12,7 @@ public class MirageMaintenanceTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileAsString("src/test/resources/day_9/dayNineTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileAsString("src/test/resources/day_9/dayNineInput.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -22,13 +22,13 @@ public class MirageMaintenanceTest {
     public void mirageMaintenancePartOneTest() {
         long result = MirageMaintenance.extrapolatedSumPartOne(FILE_CONTENTS);
 
-        assertEquals(114, result);
+        assertEquals(1702218515, result);
     }
 
     @Test
     public void mirageMaintenancePartTwoTest() {
         long result = MirageMaintenance.extrapolatedSumPartTwo(FILE_CONTENTS);
 
-        assertEquals(2, result);
+        assertEquals(925, result);
     }
 }

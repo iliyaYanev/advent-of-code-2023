@@ -12,7 +12,7 @@ public class FertilizerTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileAsString("src/test/resources/day_5/dayFiveTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileAsString("src/test/resources/day_5/dayFiveInput.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -22,13 +22,13 @@ public class FertilizerTest {
     public void fertilizerPartOneTest() {
         long result = FertilizerPartOne.lowestLocation(FILE_CONTENTS);
 
-        assertEquals(35, result);
+        assertEquals(535088217, result);
     }
 
     @Test
     public void fertilizerPartTwoTest() {
         long result = FertilizerPartTwo.lowestLocation(FILE_CONTENTS);
 
-        assertEquals(46, result);
+        assertEquals(51399228, result);
     }
 }

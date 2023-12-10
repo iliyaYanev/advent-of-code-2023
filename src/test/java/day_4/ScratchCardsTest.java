@@ -13,7 +13,7 @@ public class ScratchCardsTest {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_4/dayFourTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_4/dayFourInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -23,13 +23,13 @@ public class ScratchCardsTest {
     public void scratchCardPointsPartOneTest() {
         long result = ScratchCardsPartOne.scratchCardPoints(FILE_CONTENTS);
 
-        assertEquals(13, result);
+        assertEquals(21088, result);
     }
 
     @Test
     public void scratchCardPointsPartTwoTest() {
         long result = ScratchCardsPartTwo.scratchCardPoints(FILE_CONTENTS);
 
-        assertEquals(30, result);
+        assertEquals(6874754, result);
     }
 }

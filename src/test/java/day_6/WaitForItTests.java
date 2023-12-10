@@ -13,7 +13,7 @@ public class WaitForItTests {
 
     static {
         try {
-            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_6/daySixTestInput.txt");
+            FILE_CONTENTS = GetInputFileContents.getFileLines("src/test/resources/day_6/daySixInput.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -23,13 +23,13 @@ public class WaitForItTests {
     public void waitForItPartOneTest() {
         long result = WaitForItPartOne.possibleWins(FILE_CONTENTS);
 
-        assertEquals(288, result);
+        assertEquals(128700, result);
     }
 
     @Test
     public void waitForItPartTwoTest() {
         long result = WaitForItPartTwo.possibleWins(FILE_CONTENTS);
 
-        assertEquals(71503, result);
+        assertEquals(39594072, result);
     }
 }
