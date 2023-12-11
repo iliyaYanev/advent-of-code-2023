@@ -21,8 +21,8 @@ public class CosmicExpansion {
         long distance = 0;
         List<PointV2> galaxies = new ArrayList<>();
 
-        for (var y = 0; y < fileContents.size(); y++) {
-            for (var x = 0; x < fileContents.get(y).length(); x++) {
+        for (int y = 0; y < fileContents.size(); y++) {
+            for (int x = 0; x < fileContents.get(y).length(); x++) {
                 if (fileContents.get(y).charAt(x) == '#') {
                     galaxies.add(new PointV2(x, y));
                 }
@@ -45,7 +45,7 @@ public class CosmicExpansion {
             .filter(y -> !verticalPositions.contains(y)).boxed()
             .toList();
 
-        for (var galaxy: galaxies) {
+        for (PointV2 galaxy: galaxies) {
             long delHor = emptyRows.stream()
                 .filter(emptyColumn -> galaxy.getX() > emptyColumn)
                 .count();
@@ -60,8 +60,8 @@ public class CosmicExpansion {
         }
 
 
-        for (var i = 0; i < galaxies.size() - 1; i++) {
-            for (var j = i; j < galaxies.size(); j++) {
+        for (int i = 0; i < galaxies.size() - 1; i++) {
+            for (int j = i; j < galaxies.size(); j++) {
                 distance += galaxies.get(i).manhattanDistance(galaxies.get(j));
             }
         }
