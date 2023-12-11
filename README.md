@@ -10,3 +10,4 @@
 * #### [Haunted Wasteland](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_8)
 * #### [Mirage Maintenance](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_9)
 * #### [Pipe Maze](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_10)
+* #### [Cosmic Expansion](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_11)
