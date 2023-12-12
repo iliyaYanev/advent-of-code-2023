@@ -79,7 +79,7 @@ public class Hand implements Comparable<Hand> {
             .toList());
 
         if (withJokers) {
-            int topValue = sortedValues.get(0);
+            int topValue = sortedValues.getFirst();
             topValue += jokers;
             sortedValues.set(0, topValue);
         }

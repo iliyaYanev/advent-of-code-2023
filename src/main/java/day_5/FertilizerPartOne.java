@@ -35,25 +35,31 @@ public class FertilizerPartOne {
 
                     return matches;
                 })
-                .map(parts -> new FertilizerMap(parts.get(0), parts.get(1), parts.get(2)))
+                .map(parts -> new FertilizerMap(parts.getFirst(), parts.get(1), parts.get(2)))
                 .toList())
             .toList();
 
         for (long seed: seeds) {
-            long currentValue = seed;
-
-            for (List<FertilizerMap> categoryFertilizerMaps : categoriesMaps) {
-                for (FertilizerMap fertilizerMap : categoryFertilizerMaps) {
-                    if (currentValue >= fertilizerMap.source() && currentValue <= fertilizerMap.source() + fertilizerMap.count()) {
-                        currentValue = fertilizerMap.destination() + (currentValue - fertilizerMap.source());
-                        break;
-                    }
-                }
-            }
+            long currentValue = getCurrentValue(seed, categoriesMaps);
 
             minLocation = Math.min(currentValue, minLocation);
         }
 
         return minLocation;
+    }
+
+    private static long getCurrentValue(long seed, List<List<FertilizerMap>> categoriesMaps) {
+        long currentValue = seed;
+
+        for (List<FertilizerMap> categoryFertilizerMaps : categoriesMaps) {
+            for (FertilizerMap fertilizerMap : categoryFertilizerMaps) {
+                if (currentValue >= fertilizerMap.source() && currentValue <= fertilizerMap.source() + fertilizerMap.count()) {
+                    currentValue = fertilizerMap.destination() + (currentValue - fertilizerMap.source());
+                    break;
+                }
+            }
+        }
+
+        return currentValue;
     }
 }

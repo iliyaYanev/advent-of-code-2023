@@ -36,7 +36,7 @@ public class FertilizerPartTwo {
 
                     return matches;
                 })
-                .map(parts -> new FertilizerMap(parts.get(0), parts.get(1), parts.get(2)))
+                .map(parts -> new FertilizerMap(parts.getFirst(), parts.get(1), parts.get(2)))
                 .toList())
             .toList();
 

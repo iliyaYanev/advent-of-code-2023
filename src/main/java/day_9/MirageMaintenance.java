@@ -14,7 +14,7 @@ public class MirageMaintenance {
             .map(MirageMaintenance::parseLong)
             .map(MirageMaintenance::expand)
             .map(Lists::reverse)
-            .map(l -> l.stream().reduce(0L, (a, b) -> a + b.get(b.size() - 1), Long::sum))
+            .map(l -> l.stream().reduce(0L, (a, b) -> a + b.getLast(), Long::sum))
             .mapToLong(Long::longValue)
             .sum();
     }
@@ -24,7 +24,7 @@ public class MirageMaintenance {
             .map(MirageMaintenance::parseLong)
             .map(MirageMaintenance::expand)
             .map(Lists::reverse)
-            .map(l -> l.stream().reduce(0L, (a, b) -> b.get(0) - a, Long::sum))
+            .map(l -> l.stream().reduce(0L, (a, b) -> b.getFirst() - a, Long::sum))
             .mapToLong(Long::longValue)
             .sum();
     }
@@ -53,7 +53,7 @@ public class MirageMaintenance {
             differences = next;
         } while (differences.stream().anyMatch(e -> e != 0));
 
-        longsList.remove(longsList.size() - 1);
+        longsList.removeLast();
 
         return longsList;
     }

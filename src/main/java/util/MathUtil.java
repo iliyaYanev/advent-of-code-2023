@@ -6,7 +6,7 @@ import org.apache.commons.math3.util.ArithmeticUtils;
 
 public class MathUtil {
     public static long lcm(List<Long> numbers) {
-        long result = numbers.get(0);
+        long result = numbers.getFirst();
 
         for (int i = 1; i < numbers.size(); i++) {
             result = ArithmeticUtils.lcm(result, numbers.get(i));
