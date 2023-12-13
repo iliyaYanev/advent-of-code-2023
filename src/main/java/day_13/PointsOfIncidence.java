@@ -16,7 +16,7 @@ public class PointsOfIncidence {
         return mirroredImages(input, 1);
     }
 
-    private static long mirroredImages(String input, int allowedErrors) {
+    private static long mirroredImages(String input, int offset) {
         long patternSum = 0;
 
         List<String> patterns = Arrays.stream(input.trim().split(System.lineSeparator() + System.lineSeparator()))
@@ -48,11 +48,11 @@ public class PointsOfIncidence {
             for (int row = 0; row < lines.size() - 1; row++) {
                 long rowDistance = 0;
 
-                for (int j = row, k = row + 1; j >= 0 && k < lines.size() && rowDistance <= allowedErrors; j--, k++) {
+                for (int j = row, k = row + 1; j >= 0 && k < lines.size() && rowDistance <= offset; j--, k++) {
                     rowDistance += levenshteinDistance.apply(lines.get(j), lines.get(k));
                 }
 
-                if (rowDistance == allowedErrors) {
+                if (rowDistance == offset) {
                     patternSum += 100L * (row + 1);
                     break;
                 }
@@ -61,11 +61,11 @@ public class PointsOfIncidence {
             for (int col = 0; col < columns.size() - 1; col++) {
                 long colDistance = 0;
 
-                for (int j = col, k = col + 1; j >= 0 && k < columns.size() && colDistance <= allowedErrors; j--, k++) {
+                for (int j = col, k = col + 1; j >= 0 && k < columns.size() && colDistance <= offset; j--, k++) {
                     colDistance += levenshteinDistance.apply(columns.get(j), columns.get(k));
                 }
 
-                if (colDistance == allowedErrors) {
+                if (colDistance == offset) {
                     patternSum += col + 1;
                     break;
                 }
