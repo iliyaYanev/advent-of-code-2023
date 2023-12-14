@@ -27,7 +27,7 @@ public class ReflectorDish {
                 char charAt = grid.get(point);
 
                 if (charAt == 'O') {
-                    Point lastFree = firstFreeSpot(grid, Direction.NORTH, point);
+                    Point lastFree = Point.firstFreeSpot(grid, Direction.NORTH, point);
 
                     if (lastFree != null) {
                         grid.put(lastFree, 'O');
@@ -69,7 +69,7 @@ public class ReflectorDish {
                     Character charAt = grid.get(point);
 
                     if (charAt == 'O') {
-                        Point lastFree = firstFreeSpot(grid, Direction.NORTH, point);
+                        Point lastFree = Point.firstFreeSpot(grid, Direction.NORTH, point);
 
                         if (lastFree != null) {
                             grid.put(lastFree, 'O');
@@ -85,7 +85,7 @@ public class ReflectorDish {
                     Character charAt = grid.get(point);
 
                     if (charAt == 'O') {
-                        Point lastFree = firstFreeSpot(grid, Direction.WEST, point);
+                        Point lastFree = Point.firstFreeSpot(grid, Direction.WEST, point);
 
                         if (lastFree != null) {
                             grid.put(lastFree, 'O');
@@ -101,7 +101,7 @@ public class ReflectorDish {
                     Character charAt = grid.get(point);
 
                     if (charAt == 'O') {
-                        Point lastFree = firstFreeSpot(grid, Direction.SOUTH, point);
+                        Point lastFree = Point.firstFreeSpot(grid, Direction.SOUTH, point);
 
                         if (lastFree != null) {
                             grid.put(lastFree, 'O');
@@ -117,7 +117,7 @@ public class ReflectorDish {
                     Character charAt = grid.get(point);
 
                     if (charAt == 'O') {
-                        Point lastFree = firstFreeSpot(grid, Direction.EAST, point);
+                        Point lastFree = Point.firstFreeSpot(grid, Direction.EAST, point);
 
                         if (lastFree != null) {
                             grid.put(lastFree, 'O');
@@ -148,29 +148,5 @@ public class ReflectorDish {
         }
 
         return totalLoad;
-    }
-
-    private static Point firstFreeSpot(Map<Point, Character> grid, Direction direction, Point point) {
-        Point free = null;
-        Point previousPoint = point;
-
-        while (true) {
-            previousPoint = switch (direction) {
-                case NORTH -> previousPoint.north();
-                case SOUTH -> previousPoint.south();
-                case EAST -> previousPoint.east();
-                case WEST -> previousPoint.west();
-            };
-
-            Character charAt = grid.getOrDefault(previousPoint, null);
-
-            if (charAt == null || charAt != '.') {
-                break;
-            }
-
-            free = previousPoint;
-        }
-
-        return free;
     }
 }
