@@ -20,14 +20,14 @@ public class FertilizerTest {
 
     @Test
     public void fertilizerPartOneTest() {
-        long result = FertilizerPartOne.lowestLocation(FILE_CONTENTS);
+        long result = Fertilizer.lowestLocation(FILE_CONTENTS);
 
         assertEquals(535088217, result);
     }
 
     @Test
     public void fertilizerPartTwoTest() {
-        long result = FertilizerPartTwo.lowestLocation(FILE_CONTENTS);
+        long result = Fertilizer.lowestLocationRanges(FILE_CONTENTS);
 
         assertEquals(51399228, result);
     }

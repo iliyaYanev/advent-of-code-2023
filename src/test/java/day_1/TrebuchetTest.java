@@ -21,14 +21,14 @@ public class TrebuchetTest {
 
     @Test
     public void trebuchetPartOneTest() {
-        long result = TrebuchetPartOne.getCalibrationValue(FILE_CONTENTS);
+        long result = Trebuchet.calibrationValue(FILE_CONTENTS);
 
         assertEquals(54953, result);
     }
 
     @Test
     public void trebuchetPartTwoTest() {
-        long result = TrebuchetPartTwo.getCalibrationValue(FILE_CONTENTS);
+        long result = Trebuchet.calibrationValueTwo(FILE_CONTENTS);
 
         assertEquals(53868, result);
     }

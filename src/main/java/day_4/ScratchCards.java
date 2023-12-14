@@ -5,11 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ScratchCardsPartTwo {
+public class ScratchCards {
 
     private static final Map<Integer, Integer> cardsCollected = new HashMap<>();
 
     public static long scratchCardPoints(List<String> fileContents) {
+        long points = 0;
+
+        for (String line : fileContents) {
+            String[] cards = line.split(":\\s+")[1]
+                .split("\\|");
+
+            List<Integer> winningCards = Arrays.stream(cards[0].trim().split("\\s+"))
+                .map(Integer::parseInt)
+                .toList();
+
+            List<Integer> playerCards = Arrays.stream(cards[1].trim().split("\\s+"))
+                .map(Integer::parseInt)
+                .toList();
+
+            points += (long) Math.pow(2, matchingElementsCount(playerCards, winningCards) - 1);
+        }
+
+        return points;
+    }
+
+    public static long totalScratchCards(List<String> fileContents) {
         long scratchCardPoints = 0;
 
         for (String line: fileContents) {

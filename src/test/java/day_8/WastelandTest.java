@@ -20,14 +20,14 @@ public class WastelandTest {
 
     @Test
     public void wastelandPartOneTest() {
-        long result = WastelandPartOne.wastelandSteps(FILE_CONTENTS);
+        long result = Wasteland.wastelandSteps(FILE_CONTENTS);
 
         assertEquals(19631, result);
     }
 
     @Test
     public void wastelandPartTwoTest() {
-        long result = WastelandPartTwo.wastelandSteps(FILE_CONTENTS);
+        long result = Wasteland.wastelandStepsZ(FILE_CONTENTS);
 
         assertEquals(21003205388413L, result);
     }

@@ -21,14 +21,14 @@ public class CubeConundrumTest {
 
     @Test
     public void cubeConundrumPartOneTest() {
-        int result = CubeConundrumPartOne.possibleGames(FILE_CONTENTS);
+        long result = CubeConundrum.possibleGames(FILE_CONTENTS);
 
         assertEquals(2447, result);
     }
 
     @Test
     public void cubeConundrumPartTwoTest() {
-        int result = CubeConundrumPartTwo.powerSum(FILE_CONTENTS);
+        long result = CubeConundrum.powerSum(FILE_CONTENTS);
 
         assertEquals(56322, result);
     }

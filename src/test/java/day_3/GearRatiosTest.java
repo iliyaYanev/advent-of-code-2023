@@ -21,14 +21,14 @@ public class GearRatiosTest {
 
     @Test
     public void gearRatiosPartOneTest() {
-        int result = GearRatiosPartOne.partNumbers(FILE_CONTENTS);
+        long result = GearRatios.partNumbers(FILE_CONTENTS);
 
         assertEquals(556367, result);
     }
 
     @Test
     public void gearRatiosPartTwoTest() {
-        int result  = GearRatiosPartTwo.gearRatios(FILE_CONTENTS);
+        long result  = GearRatios.gearRatios(FILE_CONTENTS);
 
         assertEquals(89471771, result);
     }

@@ -21,14 +21,14 @@ public class ScratchCardsTest {
 
     @Test
     public void scratchCardPointsPartOneTest() {
-        long result = ScratchCardsPartOne.scratchCardPoints(FILE_CONTENTS);
+        long result = ScratchCards.scratchCardPoints(FILE_CONTENTS);
 
         assertEquals(21088, result);
     }
 
     @Test
     public void scratchCardPointsPartTwoTest() {
-        long result = ScratchCardsPartTwo.scratchCardPoints(FILE_CONTENTS);
+        long result = ScratchCards.totalScratchCards(FILE_CONTENTS);
 
         assertEquals(6874754, result);
     }

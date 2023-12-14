@@ -21,14 +21,14 @@ public class CamelCardsTest {
 
     @Test
     public void camelCardsPartOneTest() {
-        long result = CamelCardsPartOne.winnings(FILE_CONTENTS);
+        long result = CamelCards.winnings(FILE_CONTENTS);
 
         assertEquals(254024898, result);
     }
 
     @Test
     public void camelCardsPartTwoTest() {
-        long result = CamelCardsPartTwo.winnings(FILE_CONTENTS);
+        long result = CamelCards.winningsJoker(FILE_CONTENTS);
 
         assertEquals(254115617, result);
     }

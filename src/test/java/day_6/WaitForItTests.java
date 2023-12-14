@@ -21,14 +21,14 @@ public class WaitForItTests {
 
     @Test
     public void waitForItPartOneTest() {
-        long result = WaitForItPartOne.possibleWins(FILE_CONTENTS);
+        long result = WaitForIt.possibleWins(FILE_CONTENTS);
 
         assertEquals(128700, result);
     }
 
     @Test
     public void waitForItPartTwoTest() {
-        long result = WaitForItPartTwo.possibleWins(FILE_CONTENTS);
+        long result = WaitForIt.possibleWinsLongerRace(FILE_CONTENTS);
 
         assertEquals(39594072, result);
     }
