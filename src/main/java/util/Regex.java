@@ -17,4 +17,23 @@ public class Regex {
 
         return list;
     }
+
+    public static List<String> matchGroups(String regex, String input) {
+        Matcher m = Pattern.compile(regex).matcher(input);
+        List<String> list = new ArrayList<>();
+
+        if (!m.find()) {
+            return null;
+        }
+
+        for (var i = 1; i <= m.groupCount(); i++) {
+            var val = m.group(i);
+
+            if (val != null) {
+                list.add(val);
+            }
+        }
+
+        return list;
+    }
 }

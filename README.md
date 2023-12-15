@@ -14,3 +14,4 @@
 * ##### [Hot Springs](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_12)
 * ##### [Point of Incidence](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_13)
 * ##### [Parabolic Reflector Dish](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_14)
+* ##### [Lens Library](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_15)
