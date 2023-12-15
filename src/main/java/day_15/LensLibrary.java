@@ -47,7 +47,6 @@ public class LensLibrary {
             Cube cube = cubes.get(cubeIndex);
 
             if (sign == '=') {
-                boolean hasLens = false;
                 assert num != null;
 
                 for (Lens lens: cube.getLenses()) {
