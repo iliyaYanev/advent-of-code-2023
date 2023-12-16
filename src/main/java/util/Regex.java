@@ -26,11 +26,11 @@ public class Regex {
             return null;
         }
 
-        for (var i = 1; i <= m.groupCount(); i++) {
-            var val = m.group(i);
+        for (int i = 1; i <= m.groupCount(); i++) {
+            String value = m.group(i);
 
-            if (val != null) {
-                list.add(val);
+            if (value != null) {
+                list.add(value);
             }
         }
 

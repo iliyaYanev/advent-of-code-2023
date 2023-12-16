@@ -64,7 +64,7 @@ public class LensLibrary {
         }
 
         for (Cube cube: cubes) {
-            var index = 1;
+            int index = 1;
 
             for (Lens lens: cube.getLenses()) {
                 focusingPower += (1L + cube.getIndex()) * index++ * lens.getValue();
