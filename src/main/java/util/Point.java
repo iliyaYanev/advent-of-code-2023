@@ -61,4 +61,31 @@ public record Point(int x, int y) {
 
         return free;
     }
+
+    public Point forwardFromDirection(Direction direction) {
+        return switch (direction) {
+            case NORTH -> north();
+            case SOUTH -> south();
+            case WEST -> west();
+            case EAST -> east();
+        };
+    }
+
+    public Point leftFromDirection(Direction direction) {
+        return switch (direction) {
+            case NORTH -> west();
+            case SOUTH -> east();
+            case WEST -> south();
+            case EAST -> north();
+        };
+    }
+
+    public Point rightFromDirection(Direction direction) {
+        return switch (direction) {
+            case NORTH -> east();
+            case SOUTH -> west();
+            case WEST -> north();
+            case EAST -> south();
+        };
+    }
 }

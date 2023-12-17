@@ -16,3 +16,4 @@
 * ##### [Parabolic Reflector Dish](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_14)
 * ##### [Lens Library](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_15)
 * ##### [The Floor Will Be Lava](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_16)
+* ##### [Clumsy Crucible](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_17)
