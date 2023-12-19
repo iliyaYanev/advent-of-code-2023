@@ -27,28 +27,28 @@ public class Lavaduct {
 
             switch (direction) {
                 case "R" -> {
-                    for (var x = 1; x <= distance; x++) {
+                    for (int x = 1; x <= distance; x++) {
                         position = position.east();
                         grid.put(position, '#');
                     }
                     maxX = Math.max(maxX, position.x());
                 }
                 case "L" -> {
-                    for (var x = 1; x <= distance; x++) {
+                    for (int x = 1; x <= distance; x++) {
                         position = position.west();
                         grid.put(position, '#');
                     }
                     minX = Math.min(minX, position.x());
                 }
                 case "U" -> {
-                    for (var x = 1; x <= distance; x++) {
+                    for (int x = 1; x <= distance; x++) {
                         position = position.north();
                         grid.put(position, '#');
                     }
                     minY = Math.min(minY, position.y());
                 }
                 case "D" -> {
-                    for (var x = 1; x <= distance; x++) {
+                    for (int x = 1; x <= distance; x++) {
                         position = position.south();
                         grid.put(position, '#');
                     }
@@ -156,9 +156,10 @@ public class Lavaduct {
         List<Direction> directions = new ArrayList<>();
 
         for (String line: fileContents) {
-            var parts = line.split(" ");
-            var color = parts[2].substring(1, 8);
-            var direction = switch (color.charAt(6)) {
+            String[] parts = line.split(" ");
+            String color = parts[2].substring(1, 8);
+
+            Direction direction = switch (color.charAt(6)) {
                 case '0' -> Direction.EAST;
                 case '1' -> Direction.SOUTH;
                 case '2' -> Direction.WEST;
