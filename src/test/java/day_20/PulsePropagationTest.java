@@ -28,7 +28,7 @@ public class PulsePropagationTest {
 
     @Test
     public void pulsePropagationPartTwoTest() {
-        long result = PulsePropagation.numberLowHighPulses2(FILE_CONTENTS);
+        long result = PulsePropagation.fewestPresses(FILE_CONTENTS);
 
         assertEquals(240162699605221L, result);
     }

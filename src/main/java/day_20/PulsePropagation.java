@@ -28,14 +28,15 @@ public class PulsePropagation {
             .filter(m -> modules.get(m).type() == Type.CONJUNCTION)
             .collect(toMap(k -> k, k -> modules.entrySet()
                 .stream()
-                .filter(e -> e.getValue().targets().contains(k)).map(Map.Entry::getKey)
+                .filter(e -> e.getValue().targets().contains(k))
+                .map(Map.Entry::getKey)
                 .collect(toMap(k2 -> k2, k2 -> false))));
 
         return range(0, 1000).mapToObj(i -> sendPulse(modules, flipflopState, conjunctionState, new HashMap<>(), i))
             .reduce(new Pair<>(0L, 0L), (a, b) -> new Pair<>(a.a() + b.a(), a.b() + b.b())).map((a, b) -> a * b);
     }
 
-    public static long numberLowHighPulses2(List<String> fileContents) {
+    public static long fewestPresses(List<String> fileContents) {
         Map<String, Module> modules = fileContents.stream()
             .map(Module::new)
             .collect(toMap(Module::source, m -> m));
@@ -60,7 +61,8 @@ public class PulsePropagation {
             .stream()
             .collect(toMap(e -> e, e -> 0L));
 
-        return range(1, Long.MAX_VALUE).map(i -> sendPulse(modules, flipflopState, conjunctionState, lcms, i).a())
+        return range(1, Long.MAX_VALUE)
+            .map(i -> sendPulse(modules, flipflopState, conjunctionState, lcms, i).a())
             .filter(e -> e != 0L)
             .findFirst()
             .orElseThrow(IllegalArgumentException::new);

@@ -9,6 +9,15 @@ public record Point(int x, int y) {
         return new Point(x + delta.x(), y + delta.y());
     }
 
+    public List<Point> getAdjacentPoints() {
+        return List.of(
+            new Point(x - 1, y),
+            new Point(x + 1, y),
+            new Point(x, y - 1),
+            new Point(x, y + 1)
+        );
+    }
+
     public List<Point> surroundingPoints() {
         return List.of(
             new Point(x - 1, y - 1),
