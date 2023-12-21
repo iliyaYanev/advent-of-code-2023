@@ -73,8 +73,8 @@ public class StepCounter {
             }
         }
 
-        var maxRow = fileContents.getFirst().length();
-        var maxCol = fileContents.size();
+        int maxRow = fileContents.getFirst().length();
+        int maxCol = fileContents.size();
 
         Set<Point> current = new HashSet<>();
         current.add(startingPoint);
@@ -88,11 +88,11 @@ public class StepCounter {
 
         for (int i = 1; i <= 26501365; i++) {
             for (Point point: current) {
-                for (var nextPoint: point.getAdjacentPoints()) {
-                    var x = (((nextPoint.x() % maxRow) + maxRow) % maxRow);
-                    var y = (((nextPoint.y() % maxCol) + maxCol) % maxCol);
+                for (Point nextPoint: point.getAdjacentPoints()) {
+                    int row = (((nextPoint.x() % maxRow) + maxRow) % maxRow);
+                    int col = (((nextPoint.y() % maxCol) + maxCol) % maxCol);
 
-                    if (obstacles.contains(new Point(x, y))) {
+                    if (obstacles.contains(new Point(row, col))) {
                         continue;
                     }
 
@@ -104,9 +104,9 @@ public class StepCounter {
             next = new HashSet<>();
 
             if (i % 131 == 65) {
-                var countIncrease = current.size() - last;
-                var increaseDifference = countIncrease - increase;
-                var increaseDifferenceDifference = increaseDifference - lastDiff;
+                long countIncrease = current.size() - last;
+                long increaseDifference = countIncrease - increase;
+                long increaseDifferenceDifference = increaseDifference - lastDiff;
 
                 last = current.size();
                 increase = countIncrease;
