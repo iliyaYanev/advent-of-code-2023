@@ -25,32 +25,7 @@ public class StepCounter {
             }
         }
 
-        int maxRow = fileContents.getFirst().length() - 1;
-        int maxCol = fileContents.size() - 1;
-
-        Set<Point> current = new HashSet<>();
-        current.add(startingPoint);
-
-        Set<Point> next = new HashSet<>();
-
-        for (int i = 0; i < 64; i++) {
-            for (Point point: current) {
-                for (Point nextPoint: point.getAdjacentPoints()) {
-                    if (nextPoint.x() < 0 || nextPoint.x() > maxRow || nextPoint.y() < 0 || nextPoint.y() > maxCol) {
-                        continue;
-                    }
-
-                    if (obstacles.contains(nextPoint)) {
-                        continue;
-                    }
-
-                    next.add(nextPoint);
-                }
-            }
-
-            current = next;
-            next = new HashSet<>();
-        }
+        Set<Point> current = getPoints(fileContents, startingPoint, obstacles);
 
         return current.size();
     }
@@ -86,7 +61,7 @@ public class StepCounter {
         long lastDiff = 0;
         long step = 0;
 
-        for (int i = 1; i <= 26501365; i++) {
+        for (int currentStep = 1; currentStep <= 26501365; currentStep++) {
             for (Point point: current) {
                 for (Point nextPoint: point.getAdjacentPoints()) {
                     int row = (((nextPoint.x() % maxRow) + maxRow) % maxRow);
@@ -103,7 +78,7 @@ public class StepCounter {
             current = next;
             next = new HashSet<>();
 
-            if (i % 131 == 65) {
+            if (currentStep % 131 == 65) {
                 long countIncrease = current.size() - last;
                 long increaseDifference = countIncrease - increase;
                 long increaseDifferenceDifference = increaseDifference - lastDiff;
@@ -113,7 +88,7 @@ public class StepCounter {
                 lastDiff = increaseDifference;
 
                 if (increaseDifferenceDifference == 0) {
-                    step = i;
+                    step = currentStep;
                     break;
                 }
             }
@@ -126,5 +101,36 @@ public class StepCounter {
         }
 
         return last;
+    }
+
+    private static Set<Point> getPoints(List<String> fileContents, Point startingPoint, Set<Point> obstacles) {
+        int maxRow = fileContents.getFirst().length() - 1;
+        int maxCol = fileContents.size() - 1;
+
+        Set<Point> current = new HashSet<>();
+        current.add(startingPoint);
+
+        Set<Point> next = new HashSet<>();
+
+        for (int row = 0; row < 64; row++) {
+            for (Point point: current) {
+                for (Point nextPoint: point.getAdjacentPoints()) {
+                    if (nextPoint.x() < 0 || nextPoint.x() > maxRow || nextPoint.y() < 0 || nextPoint.y() > maxCol) {
+                        continue;
+                    }
+
+                    if (obstacles.contains(nextPoint)) {
+                        continue;
+                    }
+
+                    next.add(nextPoint);
+                }
+            }
+
+            current = next;
+            next = new HashSet<>();
+        }
+
+        return current;
     }
 }
