@@ -21,4 +21,5 @@
 * ##### [Aplenty](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_19)
 * ##### [Pulse Propagation](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_20)
 * ##### [Step Counter](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_21)
+* ##### [Sand Slabs](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_22)
 
