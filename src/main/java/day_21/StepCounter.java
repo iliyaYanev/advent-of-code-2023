@@ -1,5 +1,6 @@
 package day_21;
 
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,10 +52,10 @@ public class StepCounter {
         int maxRow = fileContents.getFirst().length();
         int maxCol = fileContents.size();
 
-        Set<Point> current = new HashSet<>();
+        Set<Point> current = new ObjectOpenHashSet<>(200000);
         current.add(startingPoint);
 
-        Set<Point> next = new HashSet<>();
+        Set<Point> next = new ObjectOpenHashSet<>(200000);
 
         long last = 0;
         long increase = 0;
@@ -64,8 +65,8 @@ public class StepCounter {
         for (int currentStep = 1; currentStep <= 26501365; currentStep++) {
             for (Point point: current) {
                 for (Point nextPoint: point.getAdjacentPoints()) {
-                    int row = (((nextPoint.x() % maxRow) + maxRow) % maxRow);
-                    int col = (((nextPoint.y() % maxCol) + maxCol) % maxCol);
+                    int row = Math.floorMod(nextPoint.x(), maxRow);
+                    int col = Math.floorMod(nextPoint.y(), maxCol);
 
                     if (obstacles.contains(new Point(row, col))) {
                         continue;
@@ -75,8 +76,8 @@ public class StepCounter {
                 }
             }
 
-            current = next;
-            next = new HashSet<>();
+            current = new ObjectOpenHashSet<>(next);
+            next = new ObjectOpenHashSet<>(200000);
 
             if (currentStep % 131 == 65) {
                 long countIncrease = current.size() - last;
