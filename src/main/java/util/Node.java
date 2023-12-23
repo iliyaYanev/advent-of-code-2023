@@ -6,20 +6,29 @@ import java.util.Map;
 
 public class Node {
 
-    public String name;
+    private String name;
 
-    public String leftName;
+    private String leftName;
 
-    public String rightName;
+    private String rightName;
 
-    public Node left;
+    private Node left;
 
-    public Node right;
+    private Node right;
+
+    private Point point;
+
+    private Map<Node, Integer> nodes;
 
     public Node(String name, String leftName, String rightName) {
         this.name = name;
         this.leftName = leftName;
         this.rightName = rightName;
+    }
+
+    public Node(Point point) {
+        this.point = point;
+        this.nodes = new HashMap<>();
     }
 
     public static Map<String, Node> parseNodes(String input) {
@@ -37,6 +46,26 @@ public class Node {
             node.right = nodes.get(node.rightName);
         }
 
+        return nodes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Node getLeft() {
+        return left;
+    }
+
+    public Node getRight() {
+        return right;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public Map<Node, Integer> getNodes() {
         return nodes;
     }
 }

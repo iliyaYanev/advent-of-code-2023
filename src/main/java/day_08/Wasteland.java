@@ -22,9 +22,9 @@ public class Wasteland {
 
         Node current = nodes.get("AAA");
 
-        while (!current.name.equals("ZZZ")) {
+        while (!current.getName().equals("ZZZ")) {
             char move = moves.charAt((int) (steps++ % moves.length()));
-            current = move == 'L' ? current.left : current.right;
+            current = move == 'L' ? current.getLeft() : current.getRight();
         }
 
         return steps;
@@ -56,9 +56,9 @@ public class Wasteland {
             allOnZ = true;
 
             for (Ghost ghost: ghosts) {
-                ghost.setPosition(move == 'L' ? ghost.getPosition().left : ghost.getPosition().right);
+                ghost.setPosition(move == 'L' ? ghost.getPosition().getLeft() : ghost.getPosition().getRight());
 
-                if (ghost.getPosition().name.endsWith("Z")) {
+                if (ghost.getPosition().getName().endsWith("Z")) {
                     if (ghost.getLastMatchIndex() != null) {
                         ghostCycleInterval.put(ghost, steps - ghost.getLastMatchIndex());
                     }
