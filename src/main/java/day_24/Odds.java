@@ -25,7 +25,6 @@ public class Odds {
     }
 
     public static long areaIntersectionsWithZ(List<String> fileContents) {
-        long intersections = 0;
         List<Hailstone> hailstones = parseHailstones(fileContents);
 
         StringBuilder equations = new StringBuilder();
@@ -37,6 +36,11 @@ public class Odds {
         }
 
         // Have to solve a system of equations, send to mathematica, will refactor
+        // The following system of equations have to be solved
+        // t >= 0
+        // x + vx * t == hailstone_x + v_hailstone_x * t
+        // y + vy * t == hailstone_y + v_hailstone_y * t
+        // z + vz * t == hailstone_z + v_hailstone_z * t
         String sendToMathematica = "Solve[{" + equations.substring(0, equations.length() - 2) +  "}, {x,y,z,vx,vy,vz,t0,t1,t2}]";
 
         return 568386357876600L;
