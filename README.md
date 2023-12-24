@@ -23,5 +23,7 @@
 * ###### [Step Counter](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_21)
 * ###### [Sand Slabs](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_22)
 * ###### [A Long Walk](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_23)
+* ###### [Never Tell Me The Odds](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_24)
+
 
 
