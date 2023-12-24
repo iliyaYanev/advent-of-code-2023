@@ -2,31 +2,35 @@ package util;
 
 public class Point3D {
 
-    private final Integer x;
+    private final Long x;
 
-    private final Integer y;
+    private final Long y;
 
-    public Integer z;
+    public Long z;
 
-    public Point3D(int x, int y, int z) {
+    public Point3D(long x, long y, long z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public Integer getX() {
+    public Long getX() {
         return x;
     }
 
-    public Integer getY() {
+    public Long getY() {
         return y;
     }
 
-    public Integer getZ() {
+    public Long getZ() {
         return z;
     }
 
     public Point3D add(Point3D delta) {
         return new Point3D(x + delta.x, y + delta.y, z + delta.z);
+    }
+
+    public Point3D sub(Point3D delta) {
+        return new Point3D(x - delta.x, y - delta.y, z - delta.z);
     }
 }

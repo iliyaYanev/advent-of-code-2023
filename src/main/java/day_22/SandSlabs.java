@@ -42,7 +42,7 @@ public class SandSlabs {
 
     private static List<Brick> parseBricks(List<String> fileContents) {
         List<Brick> bricks = new ArrayList<>();
-        Map<Integer,ArrayList<Brick>> bricksAtLevelZ = new HashMap<>();
+        Map<Long, ArrayList<Brick>> bricksAtLevelZ = new HashMap<>();
 
         for (String line: fileContents) {
             List<Integer> numbers = Regex.matchAll("\\d+", line)
@@ -56,15 +56,15 @@ public class SandSlabs {
             );
         }
 
-        bricks.sort(Comparator.comparingInt(a -> a.getFirstPoint().getZ()));
+        bricks.sort(Comparator.comparingLong(a -> a.getFirstPoint().getZ()));
 
 
         for (Brick brick: bricks) {
-            Integer minZ = brick.getFirstPoint().getZ();
-            Integer minPossibleZ = brick.getFirstPoint().getZ();
+            Long minZ = brick.getFirstPoint().getZ();
+            Long minPossibleZ = brick.getFirstPoint().getZ();
 
             first:
-            for (int z = brick.getFirstPoint().getZ() - 1; z >= 1; z--) {
+            for (long z = brick.getFirstPoint().getZ() - 1; z >= 1; z--) {
                 for (Brick b: bricksAtLevelZ.getOrDefault(z, new ArrayList<>())) {
                     if (b.getFirstPoint().getX() <= brick.getSecondPoint().getX() &&
                         b.getSecondPoint().getX() >= brick.getFirstPoint().getX() &&
@@ -81,7 +81,7 @@ public class SandSlabs {
             brick.getFirstPoint().z -= minZ - minPossibleZ;
             brick.getSecondPoint().z -= minZ - minPossibleZ;
 
-            for (int z = brick.getFirstPoint().getZ(); z <= brick.getSecondPoint().getZ(); z++) {
+            for (long z = brick.getFirstPoint().getZ(); z <= brick.getSecondPoint().getZ(); z++) {
                 if (!bricksAtLevelZ.containsKey(z)) {
                     bricksAtLevelZ.put(z, new ArrayList<>());
                 }

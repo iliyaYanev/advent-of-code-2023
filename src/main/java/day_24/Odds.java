@@ -1,8 +1,14 @@
 package day_24;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import util.Hailstone;
+import util.Line;
+import util.Point3D;
+import util.PointV2;
+import util.Regex;
 
 public class Odds {
 
@@ -12,12 +18,37 @@ public class Odds {
 
     public static long areaIntersections(List<String> fileContents) {
         long intersections = 0;
-        List<Hailstone> hailstones = parseHailstones(fileContents);
 
-        for (int i = 0; i < hailstones.size(); i++) {
+        List<Hailstone> hailstones = populateHailstones(fileContents);
+
+        for (int i = 0; i < hailstones.size() - 1; i++) {
             for (int j = i + 1; j < hailstones.size(); j++) {
-                if (i == j) continue;
-                intersections += hailstones.get(i).intersects(hailstones.get(j), MIN, MAX) ? 1 : 0;
+                Hailstone first = hailstones.get(i);
+                Hailstone second = hailstones.get(j);
+
+                double firstSlope = (double) first.velocity().getY() / first.velocity().getX();
+                double secondSlope = (double) second.velocity().getY() / second.velocity().getX();
+
+                double firstBreak = first.position().getY() - firstSlope * first.position().getX();
+                double secondBreak = second.position().getY() - secondSlope * second.position().getX();
+
+                double intersectionX = (secondBreak - firstBreak) / (firstSlope - secondSlope);
+                double intersectionY = firstSlope * intersectionX + firstBreak;
+
+                if (
+                    intersectionX >= MIN && intersectionX <= MAX &&
+                        intersectionY >= MIN && intersectionY <= MAX &&
+                        (first.velocity().getX() >= 0 && intersectionX >= first.position().getX()
+                            || first.velocity().getX() < 0 && intersectionX < first.position().getX()) &&
+                        (first.velocity().getY() >= 0 && intersectionY >= first.position().getY()
+                            || first.velocity().getY() < 0 && intersectionY < first.position().getY()) &&
+                        (second.velocity().getX() >= 0 && intersectionX >= second.position().getX()
+                            || second.velocity().getX() < 0 && intersectionX < second.position().getX()) &&
+                        (second.velocity().getY() >= 0 && intersectionY >= second.position().getY()
+                            || second.velocity().getY() < 0 && intersectionY < second.position().getY())) {
+
+                    intersections++;
+                }
             }
         }
 
@@ -25,39 +56,118 @@ public class Odds {
     }
 
     public static long areaIntersectionsWithZ(List<String> fileContents) {
-        List<Hailstone> hailstones = parseHailstones(fileContents);
+        List<Hailstone> hailstones = populateHailstones(fileContents);
 
-        StringBuilder equations = new StringBuilder();
-        for (int i = 0; i < 3; i++) {
-            String t = "t" + i;
-            equations.append(t).append(" >= 0, ").append(hailstones.get(i).x()).append(" + ").append(hailstones.get(i).xV()).append(t).append(" == x + vx ").append(t).append(", ");
-            equations.append(hailstones.get(i).y()).append(" + ").append(hailstones.get(i).yV()).append(t).append(" == y + vy ").append(t).append(", ");
-            equations.append(hailstones.get(i).z()).append(" + ").append(hailstones.get(i).zV()).append(t).append(" == z + vz ").append(t).append(", ");
+        Set<Long> possibleVelocityX = new HashSet<>();
+        Set<Long> possibleVelocityY = new HashSet<>();
+        Set<Long> possibleVelocityZ = new HashSet<>();
+
+        for (int i = 0; i < hailstones.size() - 1; i++) {
+            for (int j = i + 1; j < hailstones.size(); j++) {
+                Hailstone first = hailstones.get(i);
+                Hailstone second = hailstones.get(j);
+
+                if (first.velocity().getX().equals(second.velocity().getX())) {
+                    Set<Long> possible = new HashSet<>();
+                    long difference = second.position().getX() - first.position().getX();
+                    for (long v = -1000; v <= 1000; v++) {
+                        if (v == first.velocity().getX()) {
+                            continue;
+                        }
+
+                        if (Math.floorMod(difference, v - first.velocity().getX()) == 0) {
+                            possible.add(v);
+                        }
+                    }
+
+                    if (possibleVelocityX.isEmpty()) {
+                        possibleVelocityX.addAll(possible);
+                    } else {
+                        possibleVelocityX.retainAll(possible);
+                    }
+                }
+
+                if (first.velocity().getY().equals(second.velocity().getY())) {
+                    Set<Long> possible = new HashSet<>();
+                    long difference = second.position().getY() - first.position().getY();
+                    for (long v = -1000; v <= 1000; v++) {
+                        if (v == first.velocity().getY()) {
+                            continue;
+                        }
+
+                        if (Math.floorMod(difference, v - first.velocity().getY()) == 0) {
+                            possible.add(v);
+                        }
+                    }
+
+                    if (possibleVelocityY.isEmpty()) {
+                        possibleVelocityY.addAll(possible);
+                    } else {
+                        possibleVelocityY.retainAll(possible);
+                    }
+                }
+
+                if (first.velocity().z.equals(second.velocity().z)) {
+                    Set<Long> possible = new HashSet<>();
+                    long difference = second.position().z - first.position().z;
+                    for (long v = -1000; v <= 1000; v++) {
+                        if (v == first.velocity().z) {
+                            continue;
+                        }
+
+                        if (Math.floorMod(difference, v - first.velocity().z) == 0) {
+                            possible.add(v);
+                        }
+                    }
+
+                    if (possibleVelocityZ.isEmpty()) {
+                        possibleVelocityZ.addAll(possible);
+                    } else {
+                        possibleVelocityZ.retainAll(possible);
+                    }
+                }
+            }
         }
 
-        // Have to solve a system of equations, send to mathematica, will refactor
-        // The following system of equations have to be solved
-        // t >= 0
-        // x + vx * t == hailstone_x + v_hailstone_x * t
-        // y + vy * t == hailstone_y + v_hailstone_y * t
-        // z + vz * t == hailstone_z + v_hailstone_z * t
-        String sendToMathematica = "Solve[{" + equations.substring(0, equations.length() - 2) +  "}, {x,y,z,vx,vy,vz,t0,t1,t2}]";
+        long velocityX = possibleVelocityX.stream().findFirst().orElseThrow();
+        long velocityY = possibleVelocityY.stream().findFirst().orElseThrow();
+        long velocityZ = possibleVelocityZ.stream().findFirst().orElseThrow();
 
-        return 568386357876600L;
+        Hailstone first = hailstones.get(0);
+        Hailstone second = hailstones.get(1);
+
+        Point3D firstBreak = first.velocity().sub(new Point3D(velocityX, velocityY, velocityZ));
+        Point3D secondBreak = second.velocity().sub(new Point3D(velocityX, velocityY, velocityZ));
+
+        Line firstLine = new Line(new PointV2(first.position().getX(), first.position().getY()), firstBreak.getX(), firstBreak.getY());
+        Line secondLine = new Line(new PointV2(second.position().getX(), second.position().getY()), secondBreak.getX(), secondBreak.getY());
+
+        PointV2 intersection = firstLine.intersects(secondLine);
+        assert intersection != null;
+
+        long timeToReach = (intersection.getX() - first.position().getX()) / firstBreak.getX();
+
+        long z = first.position().z + firstBreak.z * timeToReach;
+
+        return intersection.getX() + intersection.getY() + z;
     }
 
-    public static List<Hailstone> parseHailstones(List<String> fileContents) {
+    private static List<Hailstone> populateHailstones(List<String> fileContents) {
         List<Hailstone> hailstones = new ArrayList<>();
 
-        fileContents.forEach(line -> {
-            String[] parts = line.replaceAll("\\s", "").split("@");
+        for (String line: fileContents) {
+            List<Long> numbers = Regex.matchAll("\\-?\\d+", line)
+                .stream()
+                .map(Long::parseLong)
+                .toList();
 
-            String[] positions = parts[0].split(",");
-            String[] velocity = parts[1].split(",");
-
-            hailstones.add(new Hailstone(Long.parseLong(positions[0]), Long.parseLong(positions[1]), Long.parseLong(positions[2]),
-                Long.parseLong(velocity[0]), Long.parseLong(velocity[1]), Long.parseLong(velocity[2])));
-        });
+            hailstones.add(
+                new Hailstone(
+                    new Point3D(numbers.get(0), numbers.get(1), numbers.get(2)),
+                    new Point3D(numbers.get(3), numbers.get(4), numbers.get(5))
+                )
+            );
+        }
 
         return hailstones;
     }
