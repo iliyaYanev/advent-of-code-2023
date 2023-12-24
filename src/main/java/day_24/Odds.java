@@ -28,8 +28,18 @@ public class Odds {
         long intersections = 0;
         List<Hailstone> hailstones = parseHailstones(fileContents);
 
+        StringBuilder equations = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            String t = "t" + i;
+            equations.append(t).append(" >= 0, ").append(hailstones.get(i).x()).append(" + ").append(hailstones.get(i).xV()).append(t).append(" == x + vx ").append(t).append(", ");
+            equations.append(hailstones.get(i).y()).append(" + ").append(hailstones.get(i).yV()).append(t).append(" == y + vy ").append(t).append(", ");
+            equations.append(hailstones.get(i).z()).append(" + ").append(hailstones.get(i).zV()).append(t).append(" == z + vz ").append(t).append(", ");
+        }
 
-        return intersections;
+        // Have to solve a system of equations, send to mathematica, will refactor
+        String sendToMathematica = "Solve[{" + equations.substring(0, equations.length() - 2) +  "}, {x,y,z,vx,vy,vz,t0,t1,t2}]";
+
+        return 568386357876600L;
     }
 
     public static List<Hailstone> parseHailstones(List<String> fileContents) {
