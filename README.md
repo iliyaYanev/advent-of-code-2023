@@ -24,6 +24,4 @@
 * ###### [Sand Slabs](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_22)
 * ###### [A Long Walk](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_23)
 * ###### [Never Tell Me The Odds](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_24)
-
-
-
+* ###### ![](snowflake-solid.svg)[ Snowverload ](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_25)![](snowflake-solid.svg)
