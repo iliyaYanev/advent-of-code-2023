@@ -9,7 +9,7 @@ import util.Regex;
 public class Snowverload {
 
     public static long multiplyGroups(List<String> fileContents) {
-        var graph = new DefaultUndirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+        DefaultUndirectedGraph<String, DefaultEdge> graph = new DefaultUndirectedGraph<>(DefaultEdge.class);
 
         for (String line: fileContents) {
             Regex.matchAll("\\w+", line)
