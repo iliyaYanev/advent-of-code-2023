@@ -1,5 +1,7 @@
 # Advent of Code 2023
 
+### Included a link to a specific technique/algorithm that can help you solve that day's problem
+
 * ##### [Trebuchet?!](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_01) **-** [Regex Matching](https://www.geeksforgeeks.org/implementing-regular-expression-matching/)
 * ###### [Cube Conundrum](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_02) **-** [Range Pattern Matching](https://www.sciencedirect.com/science/article/pii/S0885064X18300797)
 * ###### [Gear Ratios](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_03) **-** [Grids](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids)
@@ -26,4 +28,3 @@
 * ###### [Never Tell Me The Odds](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_24) **-** [System Of Linear Equations](https://en.wikipedia.org/wiki/System_of_linear_equations)
 * ###### ![](snowflake-solid.svg)[ Snowverload ](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_25)![](snowflake-solid.svg) **-** [Stoer–Wagner's Minimum Cut](https://en.wikipedia.org/wiki/Stoer%E2%80%93Wagner_algorithm)
 
-### Included a link to a specific technique/algorithm that can help you solve that day's problem
