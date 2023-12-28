@@ -2,6 +2,7 @@
 
 ### Included a link to a specific technique/algorithm that can help you solve that day's problem
 
+![](snow02.gif)
 * ##### [Trebuchet?!](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_01) **-** [Regex Matching](https://www.geeksforgeeks.org/implementing-regular-expression-matching/)
 * ###### [Cube Conundrum](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_02) **-** [Range Pattern Matching](https://www.sciencedirect.com/science/article/pii/S0885064X18300797)
 * ###### [Gear Ratios](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_03) **-** [Grids](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids)
