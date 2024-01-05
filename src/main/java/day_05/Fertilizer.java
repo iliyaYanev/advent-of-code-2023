@@ -121,8 +121,8 @@ public class Fertilizer {
             List<Range<Long>> newUnmappedRanges = new ArrayList<>();
 
             for (Range<Long> unmappedRange: unmappedRanges) {
-                Range<Long> mapRange = Range.closed(
-                    fertilizerMap.source(), fertilizerMap.source() + fertilizerMap.count() - 1);
+                Range<Long> mapRange = Range.open(
+                    fertilizerMap.source(), fertilizerMap.source() + fertilizerMap.count());
 
                 if (!unmappedRange.isConnected(mapRange)) {
                     newUnmappedRanges.add(unmappedRange);
@@ -139,12 +139,12 @@ public class Fertilizer {
 
                 // If there is a range before the overlapping range, add it to the unmapped ranges.
                 if (unmappedRange.lowerEndpoint() < overlapping.lowerEndpoint()) {
-                    newUnmappedRanges.add(Range.closed(unmappedRange.lowerEndpoint(), overlapping.lowerEndpoint() - 1));
+                    newUnmappedRanges.add(Range.open(unmappedRange.lowerEndpoint(), overlapping.lowerEndpoint()));
                 }
 
                 // If there is a range after the overlapping range, add it to the unmapped ranges.
                 if (unmappedRange.upperEndpoint() > overlapping.upperEndpoint()) {
-                    newUnmappedRanges.add(Range.closed(overlapping.upperEndpoint() + 1, unmappedRange.upperEndpoint()));
+                    newUnmappedRanges.add(Range.openClosed(overlapping.upperEndpoint(), unmappedRange.upperEndpoint()));
                 }
             }
 
