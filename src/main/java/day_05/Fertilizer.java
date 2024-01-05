@@ -80,7 +80,7 @@ public class Fertilizer {
             .toList();
 
         for (int i = 0; i < seeds.size(); i += 2) {
-            Range<Long> seedRange = Range.closed(seeds.get(i), seeds.get(i) + seeds.get(i + 1) - 1);
+            Range<Long> seedRange = Range.open(seeds.get(i), seeds.get(i) + seeds.get(i + 1));
 
             List<Range<Long>> valueRanges = List.of(seedRange);
 
