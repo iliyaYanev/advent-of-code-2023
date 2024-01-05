@@ -27,4 +27,3 @@
 * ###### [A Long Walk](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_23) **-** [DFS](https://en.wikipedia.org/wiki/Depth-first_search)
 * ###### [Never Tell Me The Odds](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_24) **-** [System Of Linear Equations](https://en.wikipedia.org/wiki/System_of_linear_equations)
 * ###### ![](snowflake-solid.svg)[ Snowverload ](https://github.com/iliyaYanev/advent-of-code-2023/tree/master/src/main/java/day_25)![](snowflake-solid.svg) **-** [Stoer–Wagner Minimum Cut](https://en.wikipedia.org/wiki/Stoer%E2%80%93Wagner_algorithm)
-
