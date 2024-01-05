@@ -3,22 +3,17 @@ package day_06;
 import com.google.common.base.Joiner;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class WaitForIt {
     public static long possibleWins(List<String> fileContents) {
         long bestTimesProduct = 1;
 
-        List<Long> times = Arrays.stream(fileContents.get(0)
-                .split(":\\s+")[1]
-                .split("\\s+"))
-            .map(Long::parseLong)
-            .toList();
+        Pair<List<Long>, List<Long>> recordTimes = parseInputData(fileContents);
 
-        List<Long> records = Arrays.stream(fileContents.get(1)
-                .split(":\\s+")[1]
-                .split("\\s+"))
-            .map(Long::parseLong)
-            .toList();
+        List<Long> times = recordTimes.getLeft();
+
+        List<Long> records = recordTimes.getRight();
 
         for (int i = 0; i < times.size(); i++) {
             long currentRaceTime = times.get(i);
@@ -41,17 +36,11 @@ public class WaitForIt {
     public static long possibleWinsLongerRace(List<String> fileContents) {
         long waysToWin = 0;
 
-        List<Long> times = Arrays.stream(fileContents.get(0)
-                .split(":\\s+")[1]
-                .split("\\s+"))
-            .map(Long::parseLong)
-            .toList();
+        Pair<List<Long>, List<Long>> recordTimes = parseInputData(fileContents);
 
-        List<Long> records = Arrays.stream(fileContents.get(1)
-                .split(":\\s+")[1]
-                .split("\\s+"))
-            .map(Long::parseLong)
-            .toList();
+        List<Long> times = recordTimes.getLeft();
+
+        List<Long> records = recordTimes.getRight();
 
         long totalTime = Long.parseLong(Joiner.on("").join(times));
         long totalRecord = Long.parseLong(Joiner.on("").join(records));
@@ -67,5 +56,21 @@ public class WaitForIt {
         }
 
         return waysToWin;
+    }
+
+    private static Pair<List<Long>, List<Long>> parseInputData(List<String> fileContents) {
+        List<Long> times = Arrays.stream(fileContents.get(0)
+                .split(":\\s+")[1]
+                .split("\\s+"))
+            .map(Long::parseLong)
+            .toList();
+
+        List<Long> records = Arrays.stream(fileContents.get(1)
+                .split(":\\s+")[1]
+                .split("\\s+"))
+            .map(Long::parseLong)
+            .toList();
+
+        return Pair.of(times, records);
     }
 }
