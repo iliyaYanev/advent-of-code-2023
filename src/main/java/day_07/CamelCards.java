@@ -20,15 +20,14 @@ public class CamelCards {
             long bid = Long.parseLong(input[1]);
 
             for (int i = 0; i < cardsString.length(); i++) {
-                if (withJokers) {
-                    char currentCard = cardsString.charAt(i) == 'J' ?
-                        '*' : cardsString.charAt(i);
+                char currentCard = cardsString.charAt(i);
 
-                    cards.add(Card.ofChar(currentCard));
+                if (withJokers) {
+                    currentCard = cardsString.charAt(i) == 'J' ?
+                        '*' : cardsString.charAt(i);
                 }
-                else {
-                    cards.add(Card.ofChar(cardsString.charAt(i)));
-                }
+
+                cards.add(Card.ofChar(currentCard));
             }
 
             hands.add(new Hand(cards, bid, withJokers));
