@@ -38,9 +38,9 @@ public class PipeMaze {
         been.add(prev);
         assert prev != null;
 
-        Coordinate curr = new Coordinate(prev.x, prev.y + 1);
-        distances[curr.x * 2 + 1][curr.y * 2 + 1] = 1;
-        distances[curr.x + prev.x + 1][curr.y + prev.y + 1] = 1;
+        Coordinate curr = new Coordinate(prev.x(), prev.y() + 1);
+        distances[curr.x() * 2 + 1][curr.y() * 2 + 1] = 1;
+        distances[curr.x() + prev.x() + 1][curr.y() + prev.y() + 1] = 1;
         answer++;
 
         Map<String, Integer> types = new HashMap<>();
@@ -54,24 +54,24 @@ public class PipeMaze {
         while (!been.contains(curr)) {
             Coordinate tmp = curr;
             answer += 1;
-            Integer pipe = types.get(grid.get(curr.y).get(curr.x));
+            Integer pipe = types.get(grid.get(curr.y()).get(curr.x()));
 
             int x1 = (pipe / 1000 % 10) == 2 ? -1 : (pipe / 1000 % 10);
             int y1 = (pipe / 100 % 10) == 2 ? -1 : (pipe / 100 % 10);
             int x2 = (pipe / 10 % 10) == 2 ? -1 : (pipe / 10 % 10);
             int y2 = (pipe % 10) == 2 ? -1 : (pipe % 10);
 
-            Coordinate caseOne = new Coordinate(curr.x + x1, curr.y + y1);
-            if (prev.x == caseOne.x && prev.y == caseOne.y) {
-                curr = new Coordinate(curr.x + x2, curr.y + y2);
+            Coordinate caseOne = new Coordinate(curr.x() + x1, curr.y() + y1);
+            if (prev.x() == caseOne.x() && prev.y() == caseOne.y()) {
+                curr = new Coordinate(curr.x() + x2, curr.y() + y2);
             } else {
                 curr = caseOne;
             }
 
             prev = tmp;
             been.add(prev);
-            distances[curr.x * 2 + 1][curr.y * 2 + 1] = 1;
-            distances[curr.x + prev.x + 1][curr.y + prev.y + 1] = 1;
+            distances[curr.x() * 2 + 1][curr.y() * 2 + 1] = 1;
+            distances[curr.x() + prev.x() + 1][curr.y() + prev.y() + 1] = 1;
         }
 
         if (!partOne) {
@@ -84,8 +84,8 @@ public class PipeMaze {
                 List<Coordinate> tmp = new ArrayList<>();
                 for(Coordinate point: pointsToCheck){
                     for (int k = 0; k < 4; k++) {
-                        int newX = point.x + xs[k];
-                        int newY = point.y + ys[k];
+                        int newX = point.x() + xs[k];
+                        int newY = point.y() + ys[k];
 
                         if (newX >= 0 && newY >= 0 && newX < distances.length && newY < distances[0].length) {
                             if (distances[newX][newY] == 2) {
