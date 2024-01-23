@@ -2,7 +2,6 @@ package day_10;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +13,18 @@ public class PipeMaze {
     public static long distance(String input, boolean partOne) {
         long answer = 0;
         int[][] distances;
+
         String[] lines  = input.split(System.lineSeparator());
         List<List<String>> grid = new ArrayList<>();
+
+        Map<String, Integer> types = Map.of(
+            "|", 10102,
+            "-", 12010,
+            "F", 11001,
+            "J", 10220,
+            "7", 12001,
+            "L", 10210
+        );
 
         for(String line: lines) {
             grid.add(Arrays.stream(line.split("")).toList());
@@ -42,14 +51,6 @@ public class PipeMaze {
         distances[curr.x() * 2 + 1][curr.y() * 2 + 1] = 1;
         distances[curr.x() + prev.x() + 1][curr.y() + prev.y() + 1] = 1;
         answer++;
-
-        Map<String, Integer> types = new HashMap<>();
-        types.put("|", 10102);
-        types.put("-", 12010);
-        types.put("F", 11001);
-        types.put("J", 10220);
-        types.put("7", 12001);
-        types.put("L", 10210);
 
         while (!been.contains(curr)) {
             Coordinate tmp = curr;
