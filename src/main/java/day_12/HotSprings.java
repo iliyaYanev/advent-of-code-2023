@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import util.Regex;
 
@@ -17,17 +18,9 @@ public class HotSprings {
         long arrangementCount = 0;
 
         for (String line: fileContents) {
-            String[] parts = line.split(" ");
-            String springsLine = parts[0].chars()
-                .mapToObj(Character::toString)
-                .collect(Collectors.joining());
+            Pair<String ,List<Integer>> inputPair = parseInputLines(line);
 
-            List<Integer> numbers = Regex.matchAll("\\d+", parts[1])
-                .stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-            arrangementCount += combinationsCount(springsLine, numbers, false);
+            arrangementCount += combinationsCount(inputPair.getLeft(), inputPair.getRight(), false);
         }
 
         return arrangementCount;
@@ -37,19 +30,11 @@ public class HotSprings {
         long unfoldedRecordsCount = 0;
 
         for (String line: fileContents) {
-            String[] parts = line.split(" ");
-            String springsLine = parts[0].chars()
-                .mapToObj(Character::toString)
-                .collect(Collectors.joining());
+            Pair<String ,List<Integer>> inputPair = parseInputLines(line);
 
-            List<Integer> numbers = Regex.matchAll("\\d+", parts[1])
-                .stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-            String newSpringsLine = springsLine + ('?' + springsLine).repeat(4);
-            LinkedList<Integer> newNumbers = new LinkedList<>(numbers){{
-                addAll(numbers); addAll(numbers); addAll(numbers); addAll(numbers);
+            String newSpringsLine = inputPair.getLeft() + ('?' + inputPair.getLeft()).repeat(4);
+            LinkedList<Integer> newNumbers = new LinkedList<>(inputPair.getRight()){{
+                addAll(inputPair.getRight()); addAll(inputPair.getRight()); addAll(inputPair.getRight()); addAll(inputPair.getRight());
             }};
 
             unfoldedRecordsCount += combinationsCount(newSpringsLine, newNumbers, false);
@@ -114,5 +99,19 @@ public class HotSprings {
 
     public static Long load(Triple<String, List<Integer>, Boolean> state) {
         return previous.getOrDefault(state, null);
+    }
+
+    public static Pair<String, List<Integer>> parseInputLines(String inputLine) {
+        String[] parts = inputLine.split(" ");
+        String springsLine = parts[0].chars()
+            .mapToObj(Character::toString)
+            .collect(Collectors.joining());
+
+        List<Integer> numbers = Regex.matchAll("\\d+", parts[1])
+            .stream()
+            .map(Integer::parseInt)
+            .toList();
+
+        return Pair.of(springsLine, numbers);
     }
 }
