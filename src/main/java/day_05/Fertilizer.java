@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.tuple.Pair;
 import util.FertilizerMap;
 
 public class Fertilizer {
@@ -14,34 +15,10 @@ public class Fertilizer {
         long minLocation = Long.MAX_VALUE;
         String[] categories = input.trim().split(System.lineSeparator() + System.lineSeparator());
 
-        List<Long> seeds = Arrays.stream(categories[0]
-                .split("seeds: ")[1]
-                .split("\\s+"))
-            .map(Long::parseLong)
-            .toList();
+        Pair<List<Long>, List<List<FertilizerMap>>> seedFertilizerPair = parseSeedsAndCategories(categories);
 
-        List<List<FertilizerMap>> categoriesMaps = Arrays.stream(categories)
-            .skip(1)
-            .map(category -> category.lines()
-                .skip(1)
-                .map(entry -> {
-                    Pattern p = Pattern.compile("\\d+");
-                    Matcher m = p.matcher(entry);
-
-                    List<Long> matches = new ArrayList<>();
-
-                    while (m.find()) {
-                        matches.add(Long.parseLong(m.group()));
-                    }
-
-                    return matches;
-                })
-                .map(parts -> new FertilizerMap(parts.getFirst(), parts.get(1), parts.get(2)))
-                .toList())
-            .toList();
-
-        for (long seed: seeds) {
-            long currentValue = getCurrentValue(seed, categoriesMaps);
+        for (long seed: seedFertilizerPair.getLeft()) {
+            long currentValue = getCurrentValue(seed, seedFertilizerPair.getRight());
 
             minLocation = Math.min(currentValue, minLocation);
         }
@@ -53,6 +30,29 @@ public class Fertilizer {
         long minLocation = Long.MAX_VALUE;
         String[] categories = input.trim().split(System.lineSeparator() + System.lineSeparator());
 
+        Pair<List<Long>, List<List<FertilizerMap>>> seedFertilizerPair = parseSeedsAndCategories(categories);
+
+        for (int i = 0; i < seedFertilizerPair.getLeft().size(); i += 2) {
+            Range<Long> seedRange = Range.open(seedFertilizerPair.getLeft().get(i),
+                seedFertilizerPair.getLeft().get(i) + seedFertilizerPair.getLeft().get(i + 1));
+
+            List<Range<Long>> valueRanges = List.of(seedRange);
+
+            for (List<FertilizerMap> categoryFertilizerMaps : seedFertilizerPair.getRight()) {
+                valueRanges = applyCategoryMaps(valueRanges, categoryFertilizerMaps);
+            }
+
+            for (Range<Long> valueRange: valueRanges) {
+                if (valueRange.lowerEndpoint() < minLocation) {
+                    minLocation = valueRange.lowerEndpoint();
+                }
+            }
+        }
+
+        return minLocation;
+    }
+
+    private static Pair<List<Long>, List<List<FertilizerMap>>> parseSeedsAndCategories(String[] categories) {
         List<Long> seeds = Arrays.stream(categories[0]
                 .split("seeds: ")[1]
                 .split("\\s+"))
@@ -79,23 +79,7 @@ public class Fertilizer {
                 .toList())
             .toList();
 
-        for (int i = 0; i < seeds.size(); i += 2) {
-            Range<Long> seedRange = Range.open(seeds.get(i), seeds.get(i) + seeds.get(i + 1));
-
-            List<Range<Long>> valueRanges = List.of(seedRange);
-
-            for (List<FertilizerMap> categoryFertilizerMaps : categoriesMaps) {
-                valueRanges = applyCategoryMaps(valueRanges, categoryFertilizerMaps);
-            }
-
-            for (Range<Long> valueRange: valueRanges) {
-                if (valueRange.lowerEndpoint() < minLocation) {
-                    minLocation = valueRange.lowerEndpoint();
-                }
-            }
-        }
-
-        return minLocation;
+        return Pair.of(seeds, categoriesMaps);
     }
 
     private static long getCurrentValue(long seed, List<List<FertilizerMap>> categoriesMaps) {
