@@ -4,56 +4,27 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.apache.commons.lang3.tuple.Pair;
 import util.Point;
 
 public class StepCounter {
 
     public static long gardenPlotsReached(List<String> fileContents) {
-        Set<Point> obstacles = new HashSet<>();
-        Point startingPoint = new Point(0, 0);
+        Pair<Set<Point>, Point> obstaclePointPair = parseObstaclePoints(fileContents);
 
-        for (int col = 0; col < fileContents.size(); col++) {
-            String line = fileContents.get(col);
-
-            for (int row = 0; row < line.length(); row++) {
-                char sym = line.charAt(row);
-
-                if (sym == '#') {
-                    obstacles.add(new Point(row, col));
-                } else if (sym == 'S') {
-                    startingPoint = new Point(row, col);
-                }
-            }
-        }
-
-        Set<Point> current = getPoints(fileContents, startingPoint, obstacles);
+        Set<Point> current = getPoints(fileContents, obstaclePointPair.getRight(), obstaclePointPair.getLeft());
 
         return current.size();
     }
 
     public static long gardenPlotsReachedExactSteps(List<String> fileContents) {
-        Set<Point> obstacles = new HashSet<>();
-        Point startingPoint = new Point(0, 0);
-
-        for (int col = 0; col < fileContents.size(); col++) {
-            String line = fileContents.get(col);
-
-            for (int row = 0; row < line.length(); row++) {
-                char sym = line.charAt(row);
-
-                if (sym == '#') {
-                    obstacles.add(new Point(row, col));
-                } else if (sym == 'S') {
-                    startingPoint = new Point(row, col);
-                }
-            }
-        }
+        Pair<Set<Point>, Point> obstaclePointPair = parseObstaclePoints(fileContents);
 
         int maxRow = fileContents.getFirst().length();
         int maxCol = fileContents.size();
 
         Set<Point> current = new ObjectOpenHashSet<>(200000);
-        current.add(startingPoint);
+        current.add(obstaclePointPair.getRight());
 
         Set<Point> next = new ObjectOpenHashSet<>(200000);
 
@@ -68,7 +39,7 @@ public class StepCounter {
                     int row = Math.floorMod(nextPoint.x(), maxRow);
                     int col = Math.floorMod(nextPoint.y(), maxCol);
 
-                    if (obstacles.contains(new Point(row, col))) {
+                    if (obstaclePointPair.getLeft().contains(new Point(row, col))) {
                         continue;
                     }
 
@@ -133,5 +104,26 @@ public class StepCounter {
         }
 
         return current;
+    }
+
+    private static Pair<Set<Point>, Point> parseObstaclePoints(List<String> fileContents) {
+        Set<Point> obstacles = new HashSet<>();
+        Point startingPoint = new Point(0, 0);
+
+        for (int col = 0; col < fileContents.size(); col++) {
+            String line = fileContents.get(col);
+
+            for (int row = 0; row < line.length(); row++) {
+                char sym = line.charAt(row);
+
+                if (sym == '#') {
+                    obstacles.add(new Point(row, col));
+                } else if (sym == 'S') {
+                    startingPoint = new Point(row, col);
+                }
+            }
+        }
+
+        return Pair.of(obstacles, startingPoint);
     }
 }
