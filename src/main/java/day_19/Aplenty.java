@@ -32,17 +32,18 @@ public class Aplenty {
                     switch (condition.operation()) {
                         case '<' -> {
                             if (registerValue < condition.value()) {
-                                if (condition.targetWorkflow().equals("A")) {
+                                if (!condition.targetWorkflow().equals("A")) {
+                                    if (condition.targetWorkflow().equals("R")) {
+                                        break nextWorkflow;
+                                    }
+
+                                    workflow = workflows.get(condition.targetWorkflow());
+                                    continue nextWorkflow;
+                                } else {
                                     acceptedParts.add(part);
                                     break nextWorkflow;
                                 }
 
-                                if (condition.targetWorkflow().equals("R")) {
-                                    break nextWorkflow;
-                                }
-
-                                workflow = workflows.get(condition.targetWorkflow());
-                                continue nextWorkflow;
                             }
                         }
                         case '>' -> {
@@ -113,16 +114,16 @@ public class Aplenty {
         while (hasUnprocessedRanges) {
             hasUnprocessedRanges = false;
 
-            for (Map.Entry<String, ArrayList<HashMap<Character, Range<Integer>>>> workf: workflowQueue.entrySet()) {
-                if (workf.getValue().isEmpty()) {
+            for (Map.Entry<String, ArrayList<HashMap<Character, Range<Integer>>>> work: workflowQueue.entrySet()) {
+                if (work.getValue().isEmpty()) {
                     continue;
                 }
 
                 hasUnprocessedRanges = true;
 
-                Workflow workflow = workflows.get(workf.getKey());
-                List<HashMap<Character, Range<Integer>>> ranges = workf.getValue();
-                workflowQueue.put(workf.getKey(), new ArrayList<>());
+                Workflow workflow = workflows.get(work.getKey());
+                List<HashMap<Character, Range<Integer>>> ranges = work.getValue();
+                workflowQueue.put(work.getKey(), new ArrayList<>());
 
                 nextRange:
                 for (HashMap<Character, Range<Integer>> range: ranges) {

@@ -22,8 +22,6 @@ public class PointsOfIncidence {
         List<String> patterns = Arrays.stream(input.trim().split(System.lineSeparator() + System.lineSeparator()))
             .toList();
 
-        LevenshteinDistance levenshteinDistance = LevenshteinDistance.getDefaultInstance();
-
         for (String pattern: patterns) {
             List<String> lines = Arrays.stream(pattern.split(System.lineSeparator()))
                 .toList();
@@ -48,9 +46,7 @@ public class PointsOfIncidence {
             for (int row = 0; row < lines.size() - 1; row++) {
                 long rowDistance = 0;
 
-                for (int j = row, k = row + 1; j >= 0 && k < lines.size() && rowDistance <= offset; j--, k++) {
-                    rowDistance += levenshteinDistance.apply(lines.get(j), lines.get(k));
-                }
+                rowDistance += calculateDistance(lines, offset, row, rowDistance);
 
                 if (rowDistance == offset) {
                     patternSum += 100L * (row + 1);
@@ -61,9 +57,7 @@ public class PointsOfIncidence {
             for (int col = 0; col < columns.size() - 1; col++) {
                 long colDistance = 0;
 
-                for (int j = col, k = col + 1; j >= 0 && k < columns.size() && colDistance <= offset; j--, k++) {
-                    colDistance += levenshteinDistance.apply(columns.get(j), columns.get(k));
-                }
+                colDistance += calculateDistance(columns, offset, col, colDistance);
 
                 if (colDistance == offset) {
                     patternSum += col + 1;
@@ -73,5 +67,15 @@ public class PointsOfIncidence {
         }
 
         return patternSum;
+    }
+
+    private static long calculateDistance(List<String> lines, int offset, int index, long distance) {
+        LevenshteinDistance levenshteinDistance = LevenshteinDistance.getDefaultInstance();
+
+        for (int j = index, k = index + 1; j >= 0 && k < lines.size() && distance <= offset; j--, k++) {
+            distance += levenshteinDistance.apply(lines.get(j), lines.get(k));
+        }
+
+        return distance;
     }
 }

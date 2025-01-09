@@ -11,15 +11,7 @@ public class ReflectorDish {
     public static long northSupportBeamsLoad(List<String> fileContents) {
         long totalLoad = 0;
         int maxWeight = fileContents.size();
-        Map<Point, Character> grid = new HashMap<>();
-
-        for (int col = 0; col < fileContents.size(); col++) {
-            String line = fileContents.get(col);
-
-            for (int row = 0; row < line.length(); row++) {
-                grid.put(new Point(row, col), line.charAt(row));
-            }
-        }
+        Map<Point, Character> grid = parseGrid(fileContents);
 
         for (int row = 0; row < fileContents.getFirst().length(); row++) {
             for (int col = 0; col < fileContents.size(); col++) {
@@ -51,16 +43,8 @@ public class ReflectorDish {
         int maxWeight = fileContents.size();
         boolean withMemory = true;
 
-        Map<Point, Character> grid = new HashMap<>();
+        Map<Point, Character> grid = parseGrid(fileContents);
         Map<HashMap<Point, Character>, Integer> memory = new HashMap<>();
-
-        for (int col = 0; col < fileContents.size(); col++) {
-            String line = fileContents.get(col);
-
-            for (int row = 0; row < line.length(); row++) {
-                grid.put(new Point(row, col), line.charAt(row));
-            }
-        }
 
         for (int cycle = 1; cycle <= 1000000000; cycle++) {
             for (int row = 0; row < fileContents.getFirst().length(); row++) {
@@ -128,7 +112,7 @@ public class ReflectorDish {
             }
 
             if (withMemory) {
-                if (memory.containsKey(grid)) {
+                if (memory.containsKey((HashMap<Point, Character>) grid)) {
                     int firstSeenIndex = memory.get(grid);
                     int repeatingWindow = cycle - firstSeenIndex;
 
@@ -148,5 +132,19 @@ public class ReflectorDish {
         }
 
         return totalLoad;
+    }
+
+    private static Map<Point, Character> parseGrid(List<String> fileContents) {
+        Map<Point, Character> grid = new HashMap<>();
+
+        for (int col = 0; col < fileContents.size(); col++) {
+            String line = fileContents.get(col);
+
+            for (int row = 0; row < line.length(); row++) {
+                grid.put(new Point(row, col), line.charAt(row));
+            }
+        }
+
+        return grid;
     }
 }
