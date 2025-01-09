@@ -38,12 +38,10 @@ public class Odds {
                 if (
                     intersectionX >= MIN && intersectionX <= MAX &&
                         intersectionY >= MIN && intersectionY <= MAX &&
-                        (first.velocity().getX() >= 0 && intersectionX >= first.position().getX()
-                            || first.velocity().getX() < 0 && intersectionX < first.position().getX()) &&
+                        (isIntersectingX(first, intersectionX)) &&
                         (first.velocity().getY() >= 0 && intersectionY >= first.position().getY()
                             || first.velocity().getY() < 0 && intersectionY < first.position().getY()) &&
-                        (second.velocity().getX() >= 0 && intersectionX >= second.position().getX()
-                            || second.velocity().getX() < 0 && intersectionX < second.position().getX()) &&
+                        (isIntersectingX(second, intersectionX)) &&
                         (second.velocity().getY() >= 0 && intersectionY >= second.position().getY()
                             || second.velocity().getY() < 0 && intersectionY < second.position().getY())) {
 
@@ -170,5 +168,10 @@ public class Odds {
         }
 
         return hailstones;
+    }
+
+    private static boolean isIntersectingX(Hailstone hailstone, double intersectionX) {
+        return hailstone.velocity().getX() >= 0 && intersectionX >= hailstone.position().getX()
+            || hailstone.velocity().getX() < 0 && intersectionX < hailstone.position().getX();
     }
 }
