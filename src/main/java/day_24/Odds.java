@@ -36,15 +36,12 @@ public class Odds {
                 double intersectionY = firstSlope * intersectionX + firstBreak;
 
                 if (
-                    intersectionX >= MIN && intersectionX <= MAX &&
-                        intersectionY >= MIN && intersectionY <= MAX &&
-                        (isIntersectingX(first, intersectionX)) &&
-                        (first.velocity().getY() >= 0 && intersectionY >= first.position().getY()
-                            || first.velocity().getY() < 0 && intersectionY < first.position().getY()) &&
-                        (isIntersectingX(second, intersectionX)) &&
-                        (second.velocity().getY() >= 0 && intersectionY >= second.position().getY()
-                            || second.velocity().getY() < 0 && intersectionY < second.position().getY())) {
-
+                    isInRange(intersectionX, intersectionY) &&
+                    isIntersectingX(first, intersectionX) &&
+                    isIntersectingY(first, intersectionY) &&
+                    isIntersectingX(second, intersectionX) &&
+                    isIntersectingY(second, intersectionY)
+                ) {
                     intersections++;
                 }
             }
@@ -170,8 +167,20 @@ public class Odds {
         return hailstones;
     }
 
+    private static boolean isInRange(double intersectionX, double intersectionY) {
+        return intersectionX >= MIN && intersectionX <= MAX &&
+            intersectionY >= MIN && intersectionY <= MAX;
+    }
+
     private static boolean isIntersectingX(Hailstone hailstone, double intersectionX) {
-        return hailstone.velocity().getX() >= 0 && intersectionX >= hailstone.position().getX()
-            || hailstone.velocity().getX() < 0 && intersectionX < hailstone.position().getX();
+        return intersectionX >= MIN && intersectionX <= MAX &&
+            hailstone.velocity().getX() >= 0 && intersectionX >= hailstone.position().getX() ||
+            hailstone.velocity().getX() < 0 && intersectionX < hailstone.position().getX();
+    }
+
+    private static boolean isIntersectingY(Hailstone hailstone, double intersectionY) {
+        return intersectionY >= MIN && intersectionY <= MAX &&
+            hailstone.velocity().getY() >= 0 && intersectionY >= hailstone.position().getY() ||
+            hailstone.velocity().getY() < 0 && intersectionY < hailstone.position().getY();
     }
 }
